@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CDN CSS       -->
+    <link rel="stylesheet" href="https://cdn.unkuna.org/v0.9.0/css/unkuna.css">
+    <link rel="stylesheet" href="https://cdn.unkuna.org/v0.9.0/theme/unkuna-theme.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Intensity</title>
+</head>
+<body>
+    <div class="nkn-row">
+        <div class="nkn-col-s6">
+            <div class="tool-palete">
+                <div id="cable">Cable coaxial</div>
+                <div id="signal-splitter">Divisor de señal</div>
+            </div>
+        </div>
+        <div class="nkn-col-s6">
+            <h1>Crear circuito</h1>
+            <div id="create-circuit">
+                <div class="path-circuit" id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)"></div>
+                <!-- <div>
+                    <span>Potencia inicial</span>
+                    <input type="number">
+                </div>                
+                <div>
+                    <span>cable</span>
+                    <input type="number">                    
+                </div>
+                <div>
+                    <span>Potencia final</span>
+                    <output>60</output>
+                </div>                 -->
+            </div>            
+        </div>
+    </div>
+
+    <script>
+        var cable = document.getElementById('cable');
+        var circuit = document.getElementById('create-circuit');
+        cable.addEventListener('click', createCable);
+        
+        
+        function createCable() {
+            var cable = new Image();
+            cable.src = 'cable-coaxial.jpg';
+            cable.setAttribute('draggable', true);
+            cable.addEventListener("drag", dragHandler);
+            circuit.appendChild(cable)
+            console.log('cable creado')            
+        }
+        
+        function dragHandler(event){
+            console.log("dragging");
+            console.log(event.dataTransfer.type)
+            event.dataTransfer.setData('text/uri-list', event.target.src);
+        }
+
+        //drop
+        function dragover_handler(ev) {
+            console.log('drop over')
+            ev.preventDefault();
+            ev.dataTransfer.dropEffect = "move";
+        }
+        function drop_handler(ev) {
+            ev.preventDefault();
+            // Get the id of the target and add the moved element to the target's DOM
+            console.log(event.dataTransfer.types)
+            const data = ev.dataTransfer.getData('text/uri-list');
+            var cable = new Image();
+            cable.src = data;
+            console.log(data)
+            ev.target.appendChild(cable);
+        }
+        
+    </script>
+    
+     <!-- CDN JS -->
+     <script src="https://cdn.unkuna.org/v0.9.0/javascript/unkuna.js"></script>    
+</body>
+</html>
