@@ -48,15 +48,15 @@
             var cable = new Image();
             cable.src = 'cable-coaxial.jpg';
             cable.setAttribute('draggable', true);
-            cable.addEventListener("drag", dragHandler);
+            cable.addEventListener("dragstart", dragstartHandler);
+            cable.id = 'cable1'
             circuit.appendChild(cable)
             console.log('cable creado')            
         }
         
-        function dragHandler(event){
-            console.log("dragging");
-            console.log(event.dataTransfer.type)
-            event.dataTransfer.setData('text/uri-list', event.target.src);
+        function dragstartHandler(event){
+            console.log("drag start");
+            event.dataTransfer.setData('text', event.target.id);
         }
 
         //drop
@@ -68,12 +68,10 @@
         function drop_handler(ev) {
             ev.preventDefault();
             // Get the id of the target and add the moved element to the target's DOM
-            console.log(event.dataTransfer.types)
-            const data = ev.dataTransfer.getData('text/uri-list');
-            var cable = new Image();
-            cable.src = data;
+            const data = ev.dataTransfer.getData('text');
+
             console.log(data)
-            ev.target.appendChild(cable);
+            ev.target.appendChild(document.getElementById(data));
         }
         
     </script>
