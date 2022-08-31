@@ -1,82 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CDN CSS       -->
-    <link rel="stylesheet" href="https://cdn.unkuna.org/v0.9.0/css/unkuna.css">
-    <link rel="stylesheet" href="https://cdn.unkuna.org/v0.9.0/theme/unkuna-theme.css">
-    <link rel="stylesheet" href="style.css">
-    <title>Intensity</title>
-</head>
-<body>
-    <div class="nkn-row">
-        <div class="nkn-col-s6">
-            <div class="tool-palete">
-                <div id="cable">Cable coaxial</div>
-                <div id="signal-splitter">Divisor de señal</div>
-            </div>
-        </div>
-        <div class="nkn-col-s6">
-            <h1>Crear circuito</h1>
-            <div id="create-circuit">
-                <div class="path-circuit" id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)"></div>
-                <!-- <div>
-                    <span>Potencia inicial</span>
-                    <input type="number">
-                </div>                
-                <div>
-                    <span>cable</span>
-                    <input type="number">                    
-                </div>
-                <div>
-                    <span>Potencia final</span>
-                    <output>60</output>
-                </div>                 -->
-            </div>            
-        </div>
-    </div>
-
+  <head>
+    <title>Example of DataTransfer.setDragImage()</title>
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      div {
+        margin: 0em;
+        padding: 2em;
+      }
+      #source {
+        color: blue;
+        border: 1px solid black;
+      }
+      #target {
+        border: 1px solid black;
+        height: 400px;
+      }
+    </style>
     <script>
-        var cable = document.getElementById('cable');
-        var circuit = document.getElementById('create-circuit');
-        cable.addEventListener('click', createCable);
-        
-        
-        function createCable() {
-            var cable = new Image();
-            cable.src = 'cable-coaxial.jpg';
-            cable.setAttribute('draggable', true);
-            cable.addEventListener("dragstart", dragstartHandler);
-            cable.id = 'cable1'
-            circuit.appendChild(cable)
-            console.log('cable creado')            
-        }
-        
-        function dragstartHandler(event){
-            console.log("drag start");
-            event.dataTransfer.setData('text', event.target.id);
-        }
+      function dragStartHandler(ev) {
+        console.log("dragStart");
+        // Set the drag's format and data. Use the event target's id for the data
+        ev.dataTransfer.setData("text/plain", ev.target.id);
+        // Create an image and use it for the drag image
+        // NOTE: change "example.gif" to an existing image or the image will not
+        // be created and the default drag image will be used.
+        const img = new Image();
+        img.src = "example.gif";
+        ev.dataTransfer.setDragImage(img, 10, 10);
+      }
 
-        //drop
-        function dragover_handler(ev) {
-            console.log('drop over')
-            ev.preventDefault();
-            ev.dataTransfer.dropEffect = "move";
-        }
-        function drop_handler(ev) {
-            ev.preventDefault();
-            // Get the id of the target and add the moved element to the target's DOM
-            const data = ev.dataTransfer.getData('text');
+      function dragOverHandler(ev) {
+        console.log("dragOver");
+        ev.preventDefault();
+      }
 
-            console.log(data)
-            ev.target.appendChild(document.getElementById(data));
-        }
-        
+      function dropHandler(ev) {
+        console.log("Drop");
+        ev.preventDefault();
+        // Get the data, which is the id of the drop target
+        const data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+      }
     </script>
-    
-     <!-- CDN JS -->
-     <script src="https://cdn.unkuna.org/v0.9.0/javascript/unkuna.js"></script>    
-</body>
+  </head>
+  <body>
+    <h1>Example of <code>DataTransfer.setDragImage()</code></h1>
+    <div>
+      <span id="source" ondragstart="dragStartHandler(event);" draggable="true">
+        Select this element
+      </span>
+    </div>
+    <div
+      id="target"
+      ondrop="dropHandler(event);"
+      ondragover="dragOverHandler(event);">
+      Drop Zone
+    </div>
+  </body>
 </html>
