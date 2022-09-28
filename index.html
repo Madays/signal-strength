@@ -1,61 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Example of DataTransfer.setDragImage()</title>
-    <meta name="viewport" content="width=device-width" />
-    <style>
-      div {
-        margin: 0em;
-        padding: 2em;
-      }
-      #source {
-        color: blue;
-        border: 1px solid black;
-      }
-      #target {
-        border: 1px solid black;
-        height: 400px;
-      }
-    </style>
-    <script>
-      function dragStartHandler(ev) {
-        console.log("dragStart");
-        // Set the drag's format and data. Use the event target's id for the data
-        ev.dataTransfer.setData("text/plain", ev.target.id);
-        // Create an image and use it for the drag image
-        // NOTE: change "example.gif" to an existing image or the image will not
-        // be created and the default drag image will be used.
-        const img = new Image();
-        img.src = "example.gif";
-        ev.dataTransfer.setDragImage(img, 10, 10);
-      }
-
-      function dragOverHandler(ev) {
-        console.log("dragOver");
-        ev.preventDefault();
-      }
-
-      function dropHandler(ev) {
-        console.log("Drop");
-        ev.preventDefault();
-        // Get the data, which is the id of the drop target
-        const data = ev.dataTransfer.getData("text");
-        ev.target.appendChild(document.getElementById(data));
-      }
-    </script>
-  </head>
-  <body>
-    <h1>Example of <code>DataTransfer.setDragImage()</code></h1>
-    <div>
-      <span id="source" ondragstart="dragStartHandler(event);" draggable="true">
-        Select this element
-      </span>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intensity 3</title>
+    <!-- css leafleet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="tools" id="tools">
+        <img id = "tap" src="assets/images/tap.png" alt="tap"/>  
+        <!-- <img id = "cable" src="assets/images/cable.png"/>  
+        <img id = "cableInterno" src="assets/images/cable.png"/> -->
+        <img id = "splitter-2" src="assets/images/splitter-2.png" alt="splitter-2"/>
+        <img id = "splitter-3" src="assets/images/splitter-3.png" alt="splitter-3"/>
+        <img id = "dvr" src="assets/images/dvr.png" alt="dvr"/>
+        <img id = "router" src="assets/images/router.png" alt="router"/>                                                       
     </div>
-    <div
-      id="target"
-      ondrop="dropHandler(event);"
-      ondragover="dragOverHandler(event);">
-      Drop Zone
+
+    
+    <div class="color">
+        <div id="map"></div>
     </div>
-  </body>
+    <!-- Js leaflet -->
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+    <script src="js/main1.js"></script>
+</body>
 </html>

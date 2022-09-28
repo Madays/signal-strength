@@ -1,0 +1,14 @@
+#map {
+    width: 100%;
+    height: calc(100vh - 45px);
+}
+
+.leaflet-container {
+    /* background-color:red; */
+}
+
+
+.tools img {
+    width: 25px;
+    height: 41px;
+}

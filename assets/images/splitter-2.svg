@@ -1,0 +1,5 @@
+<svg width="78" height="96" viewBox="0 0 78 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="16" cy="48" r="16" fill="#18D6CA" id='input'/>
+<circle cx="62" cy="80" r="16" fill="#18D6CA" id="output-a"/>
+<circle cx="62" cy="16" r="16" fill="#18D6CA" id="output-b"/>
+</svg>
